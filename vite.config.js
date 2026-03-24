@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/personal-website/',
+  base: '/',
   plugins: [
     vue(),
     tailwindcss(),
