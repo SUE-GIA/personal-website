@@ -1,7 +1,10 @@
-<script>
+<script setup>
 import { RouterView } from 'vue-router'
+import CrtMonitor from '../components/layout/CrtMonitor.vue'
 </script>
 
 <template>
-   <RouterView />
+  <CrtMonitor>
+    <RouterView />
+  </CrtMonitor>
 </template>
