@@ -47,7 +47,6 @@ body {
             #030202 100%
     );
     animation: txt-shadow 1.6s infinite;
-    padding: 1em;
 }
 
 @media (min-width: 768px) {
