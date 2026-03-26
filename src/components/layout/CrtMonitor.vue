@@ -20,6 +20,7 @@
   height: 100vh;
   overflow: hidden;
   background: var(--bg-screen);
+  padding: 2em;
 }
 
 .crt-shell::before {
