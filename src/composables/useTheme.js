@@ -81,6 +81,26 @@ const THEMES = {
     '--glow-strong': 'rgba(200, 200, 200, 0.6)',
     '--led': 'rgba(200, 200, 200, 0.8)',
   },
+  light: {
+    accent3d: 0x2a2a2a,
+    dim3d: 0x888888,
+    bg3d: 0xf0f0f0,
+    '--bg-room': '#e8e8e8',
+    '--bg-bezel': '#d8d8d8',
+    '--bg-screen': '#f0f0f0',
+    '--bg-sidebar': 'rgba(0, 0, 0, 0.05)',
+    '--border-screen': 'rgba(0, 0, 0, 0.12)',
+    '--border-subtle': 'rgba(0, 0, 0, 0.08)',
+    '--text-primary': 'rgba(30, 30, 30, 0.85)',
+    '--text-secondary': 'rgba(60, 60, 60, 0.7)',
+    '--text-dim': 'rgba(100, 100, 100, 0.5)',
+    '--text-accent': 'rgba(20, 20, 20, 0.9)',
+    '--text-error': 'rgba(180, 40, 30, 0.85)',
+    '--text-prompt': 'rgba(80, 80, 80, 0.6)',
+    '--glow-amber': 'rgba(0, 0, 0, 0.1)',
+    '--glow-strong': 'rgba(0, 0, 0, 0.15)',
+    '--led': 'rgba(60, 60, 60, 0.8)',
+  },
 }
 
 const currentTheme = ref(localStorage.getItem('sg-theme') || 'amber')

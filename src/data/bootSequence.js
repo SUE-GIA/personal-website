@@ -2,11 +2,18 @@ export const BOOT_SEQUENCE = [
   { style: 'blank' },
   {
     style: 'emblem',
-    s: ['███████╗', '██╔════╝', '███████╗', '╚════██║', '███████║', '╚══════╝'],
-    g: [' ██████╗ ', '██╔════╝ ', '██║  ███╗', '██║   ██║', '╚██████╔╝', ' ╚═════╝ '],
+    s: [' ██████╗ ', '██╔════╝ ', '╚██████╗ ', ' ╚════██║', ' ██████╔╝', ' ╚═════╝ '],
+    g: [
+      ' ██████╗ ',
+      '██╔════╝ ',
+      '██║  ███╗',
+      '██║   ██║',
+      '╚██████╔╝',
+      ' ╚═════╝ ',
+    ],
   },
   { style: 'blank' },
-  { style: 'dim', text: '──────────────────────────────────────────────' },
+  { style: 'dim', text: '─────────────────────────────' },
   { style: 'blank' },
 
   { style: 'prompt', text: 'help' },
@@ -25,7 +32,10 @@ export const BOOT_SEQUENCE = [
   { style: 'blank' },
 
   { style: 'prompt', text: 'ls ./skills' },
-  { style: 'secondary', text: '  php/  laravel/  vue/  architecture/  system-design/  api/' },
+  {
+    style: 'secondary',
+    text: '  php/  laravel/  vue/  architecture/  system-design/  api/',
+  },
   { style: 'blank' },
 ]
 

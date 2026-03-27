@@ -120,10 +120,10 @@
 
 @keyframes flicker {
   0%   { opacity: 1; }
-  94%  { opacity: 1; }
-  95%  { opacity: 0.92; }
-  96%  { opacity: 1; }
-  98%  { opacity: 0.95; }
+  92%  { opacity: 1; }
+  93%  { opacity: 0.94; }
+  95%  { opacity: 1; }
+  97%  { opacity: 0.96; }
   100% { opacity: 1; }
 }
 </style>

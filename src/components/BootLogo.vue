@@ -38,6 +38,7 @@ onMounted(() => {
   const accent = new THREE.Color(props.accentColor)
   const dim = new THREE.Color(props.dimColor)
   const bg = new THREE.Color(props.bgColor)
+  const isLight = bg.r + bg.g + bg.b > 1.5
 
   const scene = new THREE.Scene()
   scene.background = bg
@@ -49,17 +50,17 @@ onMounted(() => {
   renderer.setSize(w, h)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.toneMapping = THREE.ReinhardToneMapping
-  renderer.toneMappingExposure = 1.2
+  renderer.toneMappingExposure = isLight ? 1.0 : 1.2
 
   const composer = new EffectComposer(renderer)
   composer.addPass(new RenderPass(scene, camera))
-  composer.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), 0.5, 0.4, 0.2))
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(w, h), isLight ? 0 : 0.5, 0.4, 0.2))
 
   const font = new FontLoader().parse(fontJson)
   const geo = new TextGeometry('SG', {
     font,
-    size: 1.4,
-    depth: 0.28,
+    size: 1,
+    depth: 0.2,
     curveSegments: 10,
     bevelEnabled: true,
     bevelThickness: 0.04,
@@ -80,10 +81,10 @@ onMounted(() => {
 
   const solidMat = new THREE.MeshStandardMaterial({
     color: accent,
-    emissive: accent,
+    emissive: isLight ? new THREE.Color(0x000000) : accent,
     emissiveIntensity: 0,
-    roughness: 0.3,
-    metalness: 0.4,
+    roughness: isLight ? 0.5 : 0.3,
+    metalness: isLight ? 0.2 : 0.4,
     transparent: true,
     opacity: 0,
   })
@@ -94,8 +95,8 @@ onMounted(() => {
   group.add(wireObj, solidObj)
   scene.add(group)
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.15))
-  const light = new THREE.PointLight(accent, 2.5, 20)
+  scene.add(new THREE.AmbientLight(0xffffff, isLight ? 0.8 : 0.15))
+  const light = new THREE.PointLight(isLight ? new THREE.Color(0xffffff) : accent, isLight ? 1.5 : 2.5, 20)
   light.position.set(0, 2, 5)
   scene.add(light)
 

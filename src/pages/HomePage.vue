@@ -82,7 +82,7 @@ const handleKeydown = async (e) => {
 </script>
 
 <template>
-  <main class="h-full w-full" @click="inputRef?.focus()">
+  <main class="h-full w-full relative" @click="inputRef?.focus()">
 
     <BootLogo
       v-if="phase === 'logo'"
@@ -106,7 +106,7 @@ const handleKeydown = async (e) => {
     <div
       v-else
       ref="containerRef"
-      class="h-full w-full p-6 md:p-10 xl:p-14 overflow-y-auto">
+      class="absolute inset-0 p-6 md:p-10 xl:p-14 overflow-y-auto overflow-x-hidden break-words">
 
       <template v-for="(line, i) in visibleLines" :key="i">
         <div v-if="line.style === 'blank'" class="h-[0.6em]" />
@@ -114,8 +114,8 @@ const handleKeydown = async (e) => {
         <div
           v-else-if="line.style === 'emblem'"
           class="flex gap-4 text-[var(--text-accent)] leading-none text-sm md:text-base xl:text-lg">
-          <pre class="font-[inherit]">{{ line.s.join('\n') }}</pre>
-          <pre class="font-[inherit]">{{ line.g.join('\n') }}</pre>
+          <pre class="font-[inherit] whitespace-pre-wrap">{{ line.s.join('\n') }}</pre>
+          <pre class="font-[inherit] whitespace-pre-wrap">{{ line.g.join('\n') }}</pre>
         </div>
 
         <p
@@ -158,11 +158,11 @@ const handleKeydown = async (e) => {
         </template>
       </template>
 
-      <div v-if="phase === 'normal'" class="mt-4 md:mt-6 flex gap-2 items-center">
-        <span class="text-lg md:text-xl xl:text-2xl text-[var(--text-prompt)]">$</span>
-        <span class="text-lg md:text-xl xl:text-2xl text-[var(--text-accent)]">{{ input }}</span>
+      <div v-if="phase === 'normal'" class="mt-4 md:mt-6 flex gap-2 items-start">
+        <span class="text-lg md:text-xl xl:text-2xl text-[var(--text-prompt)] shrink-0">$</span>
+        <span class="text-lg md:text-xl xl:text-2xl text-[var(--text-accent)] break-all min-w-0">{{ input }}</span>
         <span
-          class="inline-block w-[9px] h-[1.2em] bg-[var(--text-accent)] translate-y-[1px]"
+          class="inline-block w-[9px] h-[1.2em] bg-[var(--text-accent)] translate-y-[6px]"
           :style="{ opacity: cursorVisible ? 1 : 0 }"
         />
       </div>

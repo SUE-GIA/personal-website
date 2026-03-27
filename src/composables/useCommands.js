@@ -29,10 +29,12 @@ export function useCommands() {
 
     if (cmd === 'theme') {
       if (!arg) {
+        const dark = themeNames.filter((n) => n !== 'light')
         return {
           lines: [
             { text: `  Current theme: ${currentTheme.value}`, style: 'secondary' },
-            { text: `  Available: ${themeNames.join(', ')}`, style: 'dim' },
+            { text: `  Dark themes:  ${dark.join(', ')}`, style: 'dim' },
+            { text: '  Light themes: light', style: 'dim' },
             { text: '  Usage: theme <name>', style: 'dim' },
           ],
         }
@@ -43,7 +45,12 @@ export function useCommands() {
       return { error: `  Unknown theme "${arg}". Available: ${themeNames.join(', ')}` }
     }
 
-    return { error: '[ UNDER CONSTRUCTION ]' }
+    const knownCommands = ['about', 'skills', 'projects', 'contact']
+    if (knownCommands.includes(cmd)) {
+      return { lines: [{ text: '  [ UNDER CONSTRUCTION ]', style: 'dim' }] }
+    }
+
+    return { error: `  Unknown command: "${cmd}". Type help for available commands.` }
   }
 
   return { execute }
