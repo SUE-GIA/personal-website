@@ -28,13 +28,13 @@ export const BOOT_SEQUENCE = [
 
   { style: 'prompt', text: 'whoami' },
   { style: 'secondary', text: '  S.Giannakos — Software Engineer' },
-  { style: 'dim', text: '  Backend Systems · Laravel · Vue · Architecture' },
+  { style: 'dim', text: '  Backend Systems · Laravel · Architecture · Vue · APIs' },
   { style: 'blank' },
 
   { style: 'prompt', text: 'ls ./skills' },
   {
     style: 'secondary',
-    text: '  php/  laravel/  vue/  architecture/  system-design/  api/',
+    text: '  php/  laravel/  architecture/  system-design/  api/  vue/',
   },
   { style: 'blank' },
 ]

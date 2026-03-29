@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import BootLogo from '../components/BootLogo.vue'
+import SideBar from '../components/layout/SideBar.vue'
+import TimelinePanel from '../components/layout/TimelinePanel.vue'
+import MobileDrawer from '../components/layout/MobileDrawer.vue'
 import { useTheme } from '../composables/useTheme.js'
 import { useCommands } from '../composables/useCommands.js'
 import { BOOT_SEQUENCE, BOOT_DELAYS } from '../data/bootSequence.js'
@@ -15,6 +18,7 @@ const cursorVisible = ref(true)
 const inputRef = ref(null)
 const containerRef = ref(null)
 const phase = ref('logo')
+const drawerOpen = ref(false)
 
 let cursorInterval = null
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -57,12 +61,8 @@ const runCrashSequence = async () => {
   phase.value = 'logo'
 }
 
-const handleKeydown = async (e) => {
-  if (e.key !== 'Enter' || phase.value !== 'normal') return
-
-  const raw = input.value.trim()
-  input.value = ''
-  if (!raw) return
+const runCommand = async (raw) => {
+  if (phase.value !== 'normal') return
 
   const result = execute(raw, { clearHistory: () => { history.value = [] } })
 
@@ -76,8 +76,18 @@ const handleKeydown = async (e) => {
 
   if (history.value.filter(h => h.error).length >= 4) {
     await delay(400)
-    runCrashSequence()
+    await runCrashSequence()
   }
+}
+
+const handleKeydown = (e) => {
+  if (e.key !== 'Enter') return
+
+  const raw = input.value.trim()
+  input.value = ''
+  if (!raw) return
+
+  runCommand(raw)
 }
 </script>
 
@@ -105,8 +115,11 @@ const handleKeydown = async (e) => {
 
     <div
       v-else
+      class="absolute inset-0 p-6 md:p-10 xl:p-14 flex items-start gap-8">
+
+    <div
       ref="containerRef"
-      class="absolute inset-0 p-6 md:p-10 xl:p-14 overflow-y-auto overflow-x-hidden break-words">
+      class="flex-1 min-w-0 overflow-y-auto overflow-x-hidden break-words">
 
       <template v-for="(line, i) in visibleLines" :key="i">
         <div v-if="line.style === 'blank'" class="h-[0.6em]" />
@@ -176,6 +189,24 @@ const handleKeydown = async (e) => {
         spellcheck="false"
       />
     </div>
+
+    <div class="hidden xl:grid grid-cols-2 grid-rows-[auto_auto_1fr] gap-x-14 shrink-0 w-[44rem] h-full">
+      <TimelinePanel />
+      <SideBar @run-command="runCommand" />
+    </div>
+
+    </div>
+
+    <button
+      v-if="phase === 'normal'"
+      class="xl:hidden fixed top-6 z-[150] text-[var(--text-dim)] hover:text-[var(--text-accent)] transition-colors text-xs tracking-widest cursor-pointer"
+      @click.stop="drawerOpen = true"
+      style="right: 8%">TTY2 →</button>
+
+    <MobileDrawer
+      :open="drawerOpen"
+      @close="drawerOpen = false"
+      @run-command="(cmd) => { runCommand(cmd); inputRef?.focus() }"/>
   </main>
 </template>
 
