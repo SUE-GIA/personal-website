@@ -199,9 +199,9 @@ const handleKeydown = (e) => {
 
     <button
       v-if="phase === 'normal'"
-      class="xl:hidden fixed top-6 z-[150] text-[var(--text-dim)] hover:text-[var(--text-accent)] transition-colors text-xs tracking-widest cursor-pointer"
+      class="outline-solid xl:hidden fixed top-6 z-[150] text-[var(--text-dim)] hover:text-[var(--text-accent)] transition-colors text-xl font-black tracking-widest cursor-pointer"
       @click.stop="drawerOpen = true"
-      style="right: 8%">TTY2 →</button>
+      style="right: 8%; padding: 5px">TTY2 →</button>
 
     <MobileDrawer
       :open="drawerOpen"
