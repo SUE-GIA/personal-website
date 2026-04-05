@@ -120,7 +120,7 @@ const handleKeydown = (e) => {
     <div
       ref="containerRef"
       class="flex-1 min-w-0 overflow-y-auto overflow-x-hidden break-words relative"
-      style="overscroll-behavior: contain">
+      style="overscroll-behavior: contain; padding-bottom: env(safe-area-inset-bottom, 0px)">
 
       <template v-for="(line, i) in visibleLines" :key="i">
         <div v-if="line.style === 'blank'" class="h-[0.6em]" />

@@ -17,7 +17,7 @@
 .crt-shell {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: var(--bg-screen);
   padding: 2em;
