@@ -42,7 +42,7 @@ const onLogoDone = async () => {
   await runBootSequence()
   phase.value = 'normal'
   await nextTick()
-  inputRef.value?.focus()
+  inputRef.value?.focus({ preventScroll: true })
 }
 
 onMounted(() => {
@@ -92,7 +92,7 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
-  <main class="h-full w-full relative" @click="inputRef?.focus()">
+  <main class="h-full w-full relative" @click="inputRef?.focus({ preventScroll: true })">
 
     <BootLogo
       v-if="phase === 'logo'"
@@ -115,11 +115,12 @@ const handleKeydown = (e) => {
 
     <div
       v-else
-      class="absolute inset-0 p-6 md:p-10 xl:p-14 flex items-start gap-8">
+      class="absolute inset-0 p-6 md:p-10 xl:p-14 flex items-stretch gap-8 overflow-hidden">
 
     <div
       ref="containerRef"
-      class="flex-1 min-w-0 overflow-y-auto overflow-x-hidden break-words">
+      class="flex-1 min-w-0 overflow-y-auto overflow-x-hidden break-words relative"
+      style="overscroll-behavior: contain">
 
       <template v-for="(line, i) in visibleLines" :key="i">
         <div v-if="line.style === 'blank'" class="h-[0.6em]" />
@@ -183,7 +184,7 @@ const handleKeydown = (e) => {
       <input
         ref="inputRef"
         v-model="input"
-        class="absolute opacity-0 pointer-events-none"
+        class="fixed top-0 left-0 opacity-0 pointer-events-none"
         @keydown="handleKeydown"
         autocomplete="off"
         spellcheck="false"
@@ -206,7 +207,7 @@ const handleKeydown = (e) => {
     <MobileDrawer
       :open="drawerOpen"
       @close="drawerOpen = false"
-      @run-command="(cmd) => { runCommand(cmd); inputRef?.focus() }"/>
+      @run-command="(cmd) => { runCommand(cmd); inputRef?.focus({ preventScroll: true }) }"/>
   </main>
 </template>
 
