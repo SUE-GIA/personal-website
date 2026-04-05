@@ -17,12 +17,30 @@ export function useCommands() {
       return {
         lines: [
           { text: '  Available commands:', style: 'secondary' },
-          { text: '    about      → who am i', style: 'dim' },
+          { text: '    whoami     → who am i', style: 'dim' },
           { text: '    skills     → tech stack & tools', style: 'dim' },
-          { text: "    projects   → things i've built", style: 'dim' },
-          { text: '    contact    → get in touch', style: 'dim' },
+          { text: "    projects   → things i've worked on [under construction]", style: 'dim' },
+          { text: '    contact    → get in touch [under construction]', style: 'dim' },
+          { text: '    help       → show this list', style: 'dim' },
           { text: '    theme      → switch terminal theme', style: 'dim' },
           { text: '    clear      → clear the terminal', style: 'dim' },
+        ],
+      }
+    }
+
+    if (cmd === 'whoami') {
+      return {
+        lines: [
+          { text: '  S.Giannakos — Software Engineer', style: 'secondary' },
+          { text: '  Backend Systems · Laravel · Architecture · Vue · APIs', style: 'dim' },
+        ],
+      }
+    }
+
+    if (cmd === 'skills') {
+      return {
+        lines: [
+          { text: '  php/  laravel/  architecture/  system-design/  api/  vue/', style: 'secondary' },
         ],
       }
     }
@@ -45,7 +63,7 @@ export function useCommands() {
       return { error: `  Unknown theme "${arg}". Available: ${themeNames.join(', ')}` }
     }
 
-    const knownCommands = ['about', 'skills', 'projects', 'contact']
+    const knownCommands = ['projects', 'contact']
     if (knownCommands.includes(cmd)) {
       return { lines: [{ text: '  [ UNDER CONSTRUCTION ]', style: 'dim' }] }
     }

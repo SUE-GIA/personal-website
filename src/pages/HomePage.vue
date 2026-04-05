@@ -85,6 +85,7 @@ const handleKeydown = (e) => {
 
   const raw = input.value.trim()
   input.value = ''
+  if ('ontouchstart' in window) inputRef.value?.blur()
   if (!raw) return
 
   runCommand(raw)

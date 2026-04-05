@@ -6,7 +6,6 @@ export const PROFILE = {
 }
 
 export const NAV_ITEMS = [
-  { label: '~/about', cmd: 'about' },
   { label: '~/skills', cmd: 'skills' },
   { label: '~/projects', cmd: 'projects' },
   { label: '~/contact', cmd: 'contact' },
@@ -20,10 +19,7 @@ export const LINKS = [
 export const STATUS = 'Building scalable full stack applications with Laravel'
 
 export const TIMELINE = [
-  { year: '2026', event: 'Under Construction' },
-  { year: '2025', event: 'Under Construction' },
-  { year: '2024', event: 'Under Construction' },
-  { year: '2023', event: 'Under Construction' },
-  { year: '2022', event: 'Under Construction' },
-  { year: '2021', event: 'Under Construction' },
+  { year: '2026', event: 'Full Stack Engineer @ VIDAVO' },
+  { year: '2024', event: 'Full Stack Developer @ Cactus Digital Growth' },
+  { year: '2019', event: 'B.Sc. Computer Science — Aristotle University of Thessaloniki' },
 ]
